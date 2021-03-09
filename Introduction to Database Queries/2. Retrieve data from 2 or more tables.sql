@@ -1,4 +1,4 @@
---The explicit syntax for an inner join:
+-- The explicit syntax for an inner join:
  
 SELECT select_list
 FROM table_1
@@ -7,12 +7,12 @@ FROM table_1
       [[INNER] JOIN table_3
            ON join_condition_2]...
 
---An inner join of the Vendors and Invoices tables:
+-- An inner join of the Vendors and Invoices tables:
  
 SELECT invoice_number, vendor_name
 FROM vendors INNER JOIN invoices
 
---The syntax for an inner join that uses table aliases:
+-- The syntax for an inner join that uses table aliases:
 
 SELECT select_list
 FROM table_1 a1
@@ -21,7 +21,7 @@ FROM table_1 a1
       [[INNER] JOIN table_3 a3
            ON a2.column_name operator a3.column_name]...
            
---An inner join with aliases for all tables:
+-- An inner join with aliases for all tables:
 
 SELECT invoice_number, vendor_name, invoice_due_date,
        invoice_total - payment_total - credit_total
@@ -31,7 +31,7 @@ FROM vendors v JOIN invoices i
 WHERE invoice_total - payment_total - credit_total > 0
 ORDER BY invoice_due_date DESC
 
---An inner join with an alias for only one table:
+-- An inner join with an alias for only one table:
 
 SELECT invoice_number, line_item_amount,
        line_item_description
@@ -40,11 +40,11 @@ FROM invoices JOIN invoice_line_items line_items
 WHERE account_number = 540
 ORDER BY invoice_date
 
---The syntax of a table name that’s qualified with a database name:
+-- The syntax of a table name that’s qualified with a database name:
 
 database_name.table_name
 
---A join to a table in another database:
+-- A join to a table in another database:
 
 SELECT vendor_name, customer_last_name,
       customer_first_name, vendor_state AS state,
@@ -54,14 +54,14 @@ FROM vendors v
       ON v.vendor_zip_code = c.customer_zip
 ORDER BY state, city
 
---An inner join with two conditions: 
+-- An inner join with two conditions: 
 
 SELECT customer_first_name, customer_last_name
 FROM customers c JOIN employees e
        ON c.customer_first_name = e.first_name
       AND c.customer_last_name = e.last_name
       
---A self-join that returns vendors from cities in common with other vendors:
+-- A self-join that returns vendors from cities in common with other vendors:
 
 SELECT DISTINCT v1.vendor_name, v1.vendor_city,
        v1.vendor_state
@@ -71,7 +71,7 @@ FROM vendors v1 JOIN vendors v2
           v1.vendor_name <> v2.vendor_name
 ORDER BY v1.vendor_state, v1.vendor_city
  
---A statement that joins four tables:
+-- A statement that joins four tables:
 
 SELECT vendor_name, invoice_number, invoice_date,
        line_item_amount, account_description
@@ -85,21 +85,21 @@ FROM vendors v
 WHERE invoice_total - payment_total - credit_total > 0
 ORDER BY vendor_name, line_item_amount DESC
  
---The implicit syntax for an inner join:
+-- The implicit syntax for an inner join:
 
 SELECT select_list
 FROM table_1, table_2 [, table_3]...
 WHERE table_1.column_name operator table_2.column_name
  [AND table_2.column_name operator table_3.column_name]...
  
---Join the Vendors and Invoices tables:
+-- Join the Vendors and Invoices tables:
 
 SELECT invoice_number, vendor_name
 FROM vendors v, invoices i
 WHERE v.vendor_id = i.vendor_id
 ORDER BY invoice_number
 
---Join four tables:
+-- Join four tables:
 
 SELECT vendor_name, invoice_number, invoice_date,
        line_item_amount, account_description
@@ -111,7 +111,7 @@ WHERE v.vendor_id = i.vendor_id
      AND invoice_total - payment_total - credit_total > 0
 ORDER BY vendor_name, line_item_amount DESC
 
---The explicit syntax for an outer join:
+-- The explicit syntax for an outer join:
 
 SELECT select_list
 FROM table_1
@@ -120,14 +120,14 @@ FROM table_1
       [{LEFT|RIGHT} [OUTER] JOIN table_3
            ON join_condition_2]...
            
---A left outer join of the Vendors and Invoices tables:
+-- A left outer join of the Vendors and Invoices tables:
 
 SELECT vendor_name, invoice_number, invoice_total
 FROM vendors LEFT JOIN invoices
        ON vendors.vendor_id = invoices.vendor_id
 ORDER BY vendor_name
 
---A left outer join:
+-- A left outer join:
 
 SELECT department_name, d.department_number, last_name
 FROM departments d
@@ -135,7 +135,7 @@ FROM departments d
        ON d.department_number = e.department_number
 ORDER BY department_name
 
---A right outer join:
+-- A right outer join:
 
 SELECT department_name, e.department_number, last_name
 FROM departments d
@@ -143,7 +143,7 @@ FROM departments d
        ON d.department_number = e.department_number
 ORDER BY department_name
 
---Join three tables using left outer joins:
+-- Join three tables using left outer joins:
 
 SELECT department_name, last_name, project_number
 FROM departments d
@@ -153,7 +153,7 @@ FROM departments d
            ON e.employee_id = p.employee_id
 ORDER BY department_name, last_name
  
---Combine an outer and an inner join:
+-- Combine an outer and an inner join:
  
 SELECT department_name, last_name, project_number
 FROM departments d
@@ -164,7 +164,7 @@ FROM departments d
 ORDER BY department_name, last_name
 
 
---The syntax for a join that uses the USING keyword:
+-- The syntax for a join that uses the USING keyword:
 
 SELECT select_list
 FROM table_1
@@ -173,14 +173,14 @@ FROM table_1
        [[{LEFT|RIGHT} [OUTER]] JOIN table_3
             USING (join_column_1[, join_column_2]...)]...
 
---Use the USING keyword to join two tables:
+-- Use the USING keyword to join two tables:
 
 SELECT invoice_number, vendor_name
 FROM vendors
         JOIN invoices USING (vendor_id)
 ORDER BY invoice_number
 
---Use the USING keyword to join three tables:
+-- Use the USING keyword to join three tables:
 
 SELECT department_name, last_name, project_number
 FROM departments
@@ -188,21 +188,21 @@ FROM departments
        LEFT JOIN projects USING (employee_id)
 ORDER BY department_name
 
---The syntax for a join that uses the NATURAL keyword:
+-- The syntax for a join that uses the NATURAL keyword:
 
 SELECT select_list
 FROM table_1
          NATURAL JOIN table_2
         [NATURAL JOIN table_3]...
         
---Use the NATURAL keyword to join tables:
+-- Use the NATURAL keyword to join tables:
 
 SELECT invoice_number, vendor_name
 FROM vendors
         NATURAL JOIN invoices
 ORDER BY invoice_number
 
---Use the NATURAL keyword in a statement that joins three tables:
+-- Use the NATURAL keyword in a statement that joins three tables:
 
 SELECT department_name AS dept_name, last_name,
    project_number
@@ -211,31 +211,31 @@ FROM departments
        LEFT JOIN projects USING (employee_id)
 ORDER BY department_name
 
---The explicit syntax for a cross join:
+-- The explicit syntax for a cross join:
 
 SELECT select_list
 FROM table_1 CROSS JOIN table_2
 
---A cross join that uses the explicit syntax:
+-- A cross join that uses the explicit syntax:
 
 SELECT departments.department_number, department_name,
        employee_id, last_name
 FROM departments CROSS JOIN employees
 ORDER BY departments.department_number
 
---The implicit syntax for a cross join:
+-- The implicit syntax for a cross join:
 
 SELECT select_list
 FROM table_1, table_2
  
---A cross join that uses the implicit syntax:
+-- A cross join that uses the implicit syntax:
 
 SELECT departments.department_number, department_name,
        employee_id, last_name
 FROM departments, employees
 ORDER BY departments.department_number
 
---The syntax for a union operation:
+-- The syntax for a union operation:
 
 	SELECT_statement_1
 UNION [ALL]
@@ -244,7 +244,7 @@ UNION [ALL]
     SELECT_statement_3]...
 [ORDER BY order_by_list]
  
- --A union that combines result sets from two different tables:
+ -- A union that combines result sets from two different tables:
  
 SELECT 'Active' AS source, invoice_number,
         invoice_date, invoice_total
@@ -257,7 +257,7 @@ UNION
     WHERE invoice_date >= '2018-06-01'
 ORDER BY invoice_total DESC
 
---A union that combines result sets from a single table:
+-- A union that combines result sets from a single table:
 
 	SELECT 'Active' AS source, invoice_number,
         invoice_date, invoice_total
@@ -270,7 +270,7 @@ UNION
     WHERE invoice_total - payment_total - credit_total <= 0
 ORDER BY invoice_total DESC
 
---A union that combines result sets from the same two tables:
+-- A union that combines result sets from the same two tables:
 
     SELECT invoice_number, vendor_name,
         '33% Payment' AS payment_type,
@@ -297,7 +297,7 @@ UNION
     WHERE invoice_total < 500
 ORDER BY payment_type, vendor_name, invoice_number
     
---A union that simulates a full outer join:
+-- A union that simulates a full outer join:
 
 SELECT department_name AS dept_name,
        d.department_number AS d_dept_no,
