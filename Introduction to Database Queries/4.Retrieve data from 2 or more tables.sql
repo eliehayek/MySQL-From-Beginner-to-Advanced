@@ -272,7 +272,7 @@ ORDER BY invoice_total DESC
 
 --A union that combines result sets from the same two tables:
 
-	SELECT invoice_number, vendor_name,
+    SELECT invoice_number, vendor_name,
         '33% Payment' AS payment_type,
         invoice_total AS total,
         invoice_total * 0.333 AS payment
