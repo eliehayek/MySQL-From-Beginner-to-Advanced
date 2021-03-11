@@ -149,16 +149,14 @@ WHERE invoice_number = '97/522'
 
 UPDATE invoices
 SET terms_id = 1
-WHERE vendor_id =
-      (SELECT vendor_id FROM vendors WHERE vendor_name = 'Pacific Bell’)
+WHERE vendor_id = (SELECT vendor_id FROM vendors WHERE vendor_name = 'Pacific Bell’)
 
 
 -- Update the terms for all invoices for vendors in three states:
 
 UPDATE invoices
 SET terms_id = 1
-WHERE vendor_id IN
-      (SELECT vendor_id FROM vendors WHERE vendor_state IN ('CA', 'AZ', 'NV’))
+WHERE vendor_id IN (SELECT vendor_id FROM vendors WHERE vendor_state IN ('CA', 'AZ', 'NV’))
 
 -- The syntax of the DELETE statement:
  
