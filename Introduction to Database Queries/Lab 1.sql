@@ -21,7 +21,7 @@ For example, ‘M’ comes before ‘Murach’ */
 
 
 SELECT  first_name, last_name, 
-		CONCAT(last_name, ', ',first_name) AS full_name
+	CONCAT(last_name, ', ',first_name) AS full_name
 FROM customers
 WHERE last_name <= 'M'
 ORDER BY last_name ASC 
@@ -53,10 +53,10 @@ Use the LIMIT clause so the result set contains only the first 5 rows */
 
 
 SELECT  product_name AS 'The product name',
-		list_price AS 'The list price',
-		discount_percent AS 'The discount percent',
-		ROUND(list_price * (discount_percent / 100), 2) AS 'The discount amount',
-		ROUND(list_price - list_price * (discount_percent / 100), 2) AS 'The discount price'
+	list_price AS 'The list price',
+	discount_percent AS 'The discount percent',
+	ROUND(list_price * (discount_percent / 100), 2) AS 'The discount amount',
+	ROUND(list_price - list_price * (discount_percent / 100), 2) AS 'The discount price'
 FROM products
 ORDER BY (list_price - list_price * (discount_percent / 100)) DESC
 LIMIT 5 
@@ -76,12 +76,12 @@ Sort the result set by item total in descending sequence */
 
 
 SELECT 	item_id AS 'The item id',
-		item_price AS 'The item price',
-		discount_amount AS 'The discount amount',
-		quantity AS 'The quantity',
-		(item_price * quantity) AS 'The price total',
-		(discount_amount * quantity) AS 'The discount_total',
-		((item_price - discount_amount) * quantity) AS 'The item total'
+	item_price AS 'The item price',
+	discount_amount AS 'The discount amount',
+	quantity AS 'The quantity',
+	(item_price * quantity) AS 'The price total',
+	(discount_amount * quantity) AS 'The discount_total',
+	((item_price - discount_amount) * quantity) AS 'The item total'
 FROM order_items
 WHERE ((item_price - discount_amount) * quantity) > 500
 ORDER BY ((item_price - discount_amount) * quantity) DESC 
@@ -95,9 +95,9 @@ ORDER BY ((item_price - discount_amount) * quantity) DESC
 Return only the rows where the ship_date column contains a null value */
 
 
-SELECT order_id AS 'The order id',
-	   order_date AS 'The order date',
-       ship_date AS 'The ship date'
+SELECT 	order_id AS 'The order id',
+	order_date AS 'The order date',
+       	ship_date AS 'The ship date'
 FROM orders
 WHERE ship_date IS NULL
 
@@ -112,8 +112,8 @@ To calculate the fourth column, add the expressions you used for the first and t
 
 
 SELECT  100 AS price,
-		0.07 AS tax_rate,
-		100 * 0.07 AS tax_amount,
-		100 + 0.07 * 100 AS total
+	0.07 AS tax_rate,
+	100 * 0.07 AS tax_amount,
+	100 + 0.07 * 100 AS total
 
 
