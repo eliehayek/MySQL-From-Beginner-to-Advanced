@@ -4,9 +4,9 @@ The count of the number of orders in the Orders table named order_count
 The sum of the tax_amount columns in the Orders table named tax_total
 The average of the tax_amount columns in the Orders table named tax_average */
 
-SELECT  	COUNT(*) AS order_count,
-			SUM(tax_amount) AS tax_total,
-			AVG(tax_amount) AS tax_average
+SELECT 	COUNT(*) AS order_count,
+	SUM(tax_amount) AS tax_total,
+	AVG(tax_amount) AS tax_average
 FROM orders 
 
 
@@ -18,12 +18,13 @@ The count of the products in the Products table aliased as product_count
 The list price of the most expensive product in the Products table aliased as most_expensive_product
 Sort the result set so the category with the most products appears first */
 
-SELECT  c.category_name, 
-		COUNT(p.product_id) AS product_count,
+SELECT 	c.category_name, 
+	COUNT(p.product_id) AS product_count,
         MAX(p.list_price) AS most_expensive_product
         
 FROM 	categories c 
-		JOIN products p ON 	c.category_id = p.category_id
+	JOIN 
+	products p ON c.category_id = p.category_id
         
 GROUP BY c.category_name
 ORDER BY product_count DESC 
@@ -38,12 +39,12 @@ Sort the result set in descending sequence by the item price total for each cust
 SELECT  c.email_address AS email,
         SUM(oi.item_price * quantity) AS item_price_total,
         SUM(oi.discount_amount * quantity) AS discount_total
-FROM
-		customers c
+	
+FROM 	customers c
         JOIN
-		orders o ON c.customer_id = o.customer_id
+	orders o ON c.customer_id = o.customer_id
         JOIN
-		order_items oi ON o.order_id = oi.order_id
+	order_items oi ON o.order_id = oi.order_id
         
 GROUP BY c.email_address
 ORDER BY item_price_total ASC 
@@ -60,11 +61,11 @@ Sort the result set in descending sequence by the sum of the line item amounts *
 
 
 SELECT  c.email_address AS email,
-		COUNT(o.order_id) AS order_count,
+	COUNT(o.order_id) AS order_count,
         SUM((oi.item_price - oi.discount_amount) * oi.quantity) AS order_total
         
 FROM 	customers c 
-		JOIN 
+	JOIN 
         orders o ON c.customer_id = o.customer_id
         JOIN 
         order_items oi ON o.order_id = oi.order_id
