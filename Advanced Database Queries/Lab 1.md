@@ -1,7 +1,6 @@
 # Summery Queries Lab
 
 1. Write a SELECT statement that returns these columns:
-
 The count of the number of orders in the Orders table named order_count
 The sum of the tax_amount columns in the Orders table named tax_total
 The average of the tax_amount columns in the Orders table named tax_average.
@@ -15,7 +14,6 @@ FROM orders
 
 
 2. Write a SELECT statement that returns one row for each category that has products with these columns:
-
 The category_name column from the Categories table
 The count of the products in the Products table aliased as product_count
 The list price of the most expensive product in the Products table aliased as most_expensive_product
@@ -35,7 +33,6 @@ ORDER BY product_count DESC
 ```
 
 3. Write a SELECT statement that returns one row for each customer that has orders with these columns:
-
 The email_address column from the Customers table
 The sum of the item price in the Order_Items table multiplied by the quantity in the Order_Items table aliased as item_price_total
 The sum of the discount amount column in the Order_Items table multiplied by the quantity in the Order_Items table aliased as discount_amount_total
@@ -57,7 +54,6 @@ ORDER BY item_price_total ASC
 ```
 
 4. Write a SELECT statement that returns one row for each customer that has orders with these columns:
-
 The email_address column from the Customers table
 A count of the number of orders aliased as order_count
 The total amount for each order aliased as order_total (Hint: First, subtract the discount amount from the price. Then, multiply by the quantity.)
@@ -82,10 +78,8 @@ ORDER BY order_total DESC
 
 
 5. Modify the solution to lab 4 so it only counts and totals line items that have an item_price value that’s greater than 400.
-
 Here are the directions for lab 4:
 Write a SELECT statement that returns one row for each customer that has orders with these columns:
-
 The email_address column from the Customers table
 A count of the number of orders aliased as order_count
 The total amount for each order aliased as order_total (Hint: First, subtract the discount amount from the price. Then, multiply by the quantity.)
