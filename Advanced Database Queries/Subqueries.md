@@ -105,94 +105,80 @@ WHERE invoice_total < ANY (SELECT invoice_total
                            FROM invoices
 			   WHERE vendor_id = 115)
 ```
-
 - A query that uses a correlated subquery:
-
 ```sql
 SELECT vendor_id, invoice_number, invoice_total
 FROM invoices i
 WHERE invoice_total > (SELECT AVG(invoice_total)
-											 FROM invoices
-											 WHERE vendor_id = i.vendor_id)
+                       FROM invoices
+		       WHERE vendor_id = i.vendor_id)
 ORDER BY vendor_id, invoice_total
 ```
-
 - The syntax of a subquery that uses the EXISTS operator:
-
 ```sql
 WHERE [NOT] EXISTS (subquery)
 ```
-
 - A query that gets vendors without invoices:
-
 ```sql
 SELECT vendor_id, vendor_name, vendor_state
 FROM vendors
 WHERE NOT EXISTS (SELECT *
-									FROM invoices
-									WHERE vendor_id = vendors.vendor_id)
+                  FROM invoices
+		  WHERE vendor_id = vendors.vendor_id)
 ```
-
 - A subquery in the SELECT clause:
-
 ```sql
-SELECT vendor_name, (SELECT MAX(invoice_date) 
-										 FROM invoices
-										 WHERE vendor_id = vendors.vendor_id) AS latest_inv
+SELECT vendor_name, (SELECT MAX(invoice_date)
+                     FROM invoices
+		     WHERE vendor_id = vendors.vendor_id) AS latest_inv
 FROM vendors
 ORDER BY latest_inv DESC
 ```
-
 - The same query restated using a join:
-
 ```sql
 SELECT vendor_name, MAX(invoice_date) AS latest_inv
 FROM   vendors v
-			 LEFT JOIN invoices i 
-			 ON v.vendor_id = i.vendor_id
+       LEFT JOIN invoices i
+       ON v.vendor_id = i.vendor_id
 
 GROUP BY vendor_name
 ORDER BY latest_inv DESC
 ```
-
 - A query that uses an inline view:
-
 ```sql
 SELECT vendor_state, MAX(sum_of_invoices) AS max_sum_of_invoices
 
 FROM (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-			FROM vendors v 
-					 JOIN invoices i
-				   ON v.vendor_id = i.vendor_id
-		  GROUP BY vendor_state, vendor_name) t
+      FROM vendors v
+           JOIN invoices i
+           ON v.vendor_id = i.vendor_id
+      GROUP BY vendor_state, vendor_name) t
 
 GROUP BY vendor_state
 ORDER BY vendor_state
 ```
-
 - A complex query that uses three subqueries:
-
 ```sql
 SELECT t1.vendor_state, vendor_name, t1.sum_of_invoices
 
 					
 FROM    -- invoice totals by vendor
-				(SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-         FROM vendors v 
-						  JOIN invoices i
-              ON v.vendor_id = i.vendor_id
-         GROUP BY vendor_state, vendor_name) t1
+       (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
+       FROM vendors v
+            JOIN invoices i
+            ON v.vendor_id = i.vendor_id
+       GROUP BY vendor_state, vendor_name) t1
 
 JOIN     -- top invoice totals by state
-				 (SELECT vendor_state, MAX(sum_of_invoices) AS sum_of_invoices
-					FROM  -- invoice totals by vendor
-							  (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-								 FROM vendors v 
-											JOIN invoices i
-									    ON v.vendor_id = i.vendor_id
-						     GROUP BY vendor_state, vendor_name)t2
-
-					GROUP BY vendor_state) t3
+        (SELECT vendor_state, MAX(sum_of_invoices) AS sum_of_invoices
+	FROM  -- invoice totals by vendor
+	      (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
+	      FROM vendors v
+	           JOIN invoices i
+	           ON v.vendor_id = i.vendor_id
+	      GROUP BY vendor_state, vendor_name)t2
+	      
+	 GROUP BY vendor_state) t3
 
 ON   t1.vendor_state = t3.vendor_state AND
      t1.sum_of_invoices = t3.sum_of_invoices
@@ -220,7 +206,8 @@ b. **The code for the first subquery**
 
 ```sql
 SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-FROM  vendors v JOIN invoices i
+FROM  vendors v
+      JOIN invoices i
       ON v.vendor_id = i.vendor_id
 GROUP BY vendor_state, vendor_name
 ```
@@ -230,11 +217,11 @@ GROUP BY vendor_state, vendor_name
 ```sql
 SELECT vendor_state, MAX(sum_of_invoices) AS sum_of_invoices
 
-FROM ( SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-			 FROM vendors v 
-						JOIN invoices i
-			      ON v.vendor_id = i.vendor_id
-		   GROUP BY vendor_state, vendor_name )t
+FROM  (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
+      FROM vendors v
+           JOIN invoices i
+           ON v.vendor_id = i.vendor_id
+      GROUP BY vendor_state, vendor_name )t
 
 GROUP BY vendor_state
 ```
@@ -251,15 +238,15 @@ GROUP BY vendor_state
 - Two CTEs and a query that uses them
 
 ```sql
-WITH summary AS ( SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
-						      FROM vendors v 
-											 JOIN invoices i
-				               ON v.vendor_id = i.vendor_id
+WITH summary AS  (SELECT vendor_state, vendor_name, SUM(invoice_total) AS sum_of_invoices
+                  FROM vendors v
+		       JOIN invoices i
+		       ON v.vendor_id = i.vendor_id
                   GROUP BY vendor_state, vendor_name), 
 
-top_in_state AS ( SELECT vendor_state, MAX(sum_of_invoices) AS sum_of_invoices
-						      FROM summary
-						      GROUP BY vendor_state)
+top_in_state AS  (SELECT vendor_state, MAX(sum_of_invoices) AS sum_of_invoices
+                  FROM summary
+		  GROUP BY vendor_state)
 
 SELECT summary.vendor_state, summary.vendor_name, top_in_state.sum_of_invoices
 FROM summary 
@@ -272,22 +259,21 @@ ORDER BY summary.vendor_state
 - A recursive CTE that returns hierarchical data
 
 ```sql
-WITH RECURSIVE employees_cte AS -- Nonrecursive query 
-																(SELECT employee_id, 
-																				CONCAT(first_name, ' ', last_name) AS employee_name, 
-																				1 AS ranking
-											           FROM employees
-											           WHERE manager_id IS NULL
+WITH RECURSIVE employees_cte AS -- Nonrecursive query
+                                (SELECT employee_id,
+				        CONCAT(first_name, ' ', last_name) AS employee_name,1 AS ranking
+				 FROM employees
+				 WHERE manager_id IS NULL
 
-														     UNION ALL
+                                UNION ALL
 
-																 -- Recursive query
-																 SELECT employees.employee_id,
-																			  CONCAT(first_name, ' ', last_name),
-																		    ranking + 1
-																 FROM employees
-																      JOIN employees_cte
-																      ON employees.manager_id = employees_cte.employee_id
+                                -- Recursive query
+				(SELECT employees.employee_id,
+				        CONCAT(first_name, ' ', last_name),
+					ranking + 1
+				FROM employees
+				     JOIN employees_cte
+				     ON employees.manager_id = employees_cte.employee_id
 
 SELECT *
 FROM employees_cte
