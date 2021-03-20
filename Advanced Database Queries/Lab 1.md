@@ -1,4 +1,6 @@
-Write a SELECT statement that returns these columns:
+# Summery Queries Lab
+
+1. Write a SELECT statement that returns these columns:
 
 The count of the number of orders in the Orders table named order_count
 The sum of the tax_amount columns in the Orders table named tax_total
@@ -12,7 +14,7 @@ FROM orders
 ```
 
 
-Write a SELECT statement that returns one row for each category that has products with these columns:
+2. Write a SELECT statement that returns one row for each category that has products with these columns:
 
 The category_name column from the Categories table
 The count of the products in the Products table aliased as product_count
@@ -32,7 +34,7 @@ GROUP BY c.category_name
 ORDER BY product_count DESC 
 ```
 
-Write a SELECT statement that returns one row for each customer that has orders with these columns:
+3. Write a SELECT statement that returns one row for each customer that has orders with these columns:
 
 The email_address column from the Customers table
 The sum of the item price in the Order_Items table multiplied by the quantity in the Order_Items table aliased as item_price_total
@@ -54,7 +56,7 @@ GROUP BY c.email_address
 ORDER BY item_price_total ASC 
 ```
 
-Write a SELECT statement that returns one row for each customer that has orders with these columns:
+4. Write a SELECT statement that returns one row for each customer that has orders with these columns:
 
 The email_address column from the Customers table
 A count of the number of orders aliased as order_count
@@ -79,7 +81,7 @@ ORDER BY order_total DESC
 ```
 
 
-Modify the solution to lab 4 so it only counts and totals line items that have an item_price value that’s greater than 400.
+5. Modify the solution to lab 4 so it only counts and totals line items that have an item_price value that’s greater than 400.
 
 Here are the directions for lab 4:
 Write a SELECT statement that returns one row for each customer that has orders with these columns:
