@@ -13,7 +13,7 @@ Sort the result set by the list_price column in ascending sequence.
 
 ```sql
 SELECT FORMAT(list_price,1)  AS list_price,
-	   CONVERT(list_price, UNSIGNED)    AS price_format,
+       CONVERT(list_price, UNSIGNED)    AS price_format,
        CAST(list_price AS UNSIGNED)      AS price_cast
 FROM products
 ORDER BY list_price ASC
@@ -29,7 +29,7 @@ Sort the result set by the date_added column in ascending sequence.
 
 ```sql
 SELECT CAST(date_added AS DATE) AS added_date,
-	   CAST(date_added AS CHAR(7)) AS added_char7,
+       CAST(date_added AS CHAR(7)) AS added_char7,
        CAST(date_added AS TIME) AS added_time
 FROM products 
 ORDER BY date_added
