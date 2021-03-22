@@ -1,0 +1,159 @@
+ # Functions
+ 
+ - Some of the string functions:
+```sql
+CONCAT(str1[,str2]...)
+CONCAT_WS(sep,str1[,str2]...)
+LTRIM(str)
+RTRIM(str)
+TRIM([[BOTH|LEADING|TRAILING] [remove] FROM] str)
+LENGTH(str)
+LOCATE(find,search[,start])
+LEFT(str,length)
+RIGHT(str,length)
+SUBSTRING_INDEX(str,delimiter, count)
+SUBSTRING(str,start[,length])
+REPLACE(search,find,replace)
+INSERT(str,start,length,insert)
+REVERSE(str)
+LOWER(str)
+UPPER(str)
+LPAD(str,length,pad)
+RPAD(str,length,pad)
+SPACE(count)
+REPEAT(str,count)
+```  
+  
+- String function examples:
+```sql
+Function                                            Result
+
+CONCAT('Last', 'First')                           'LastFirst'
+CONCAT_WS(', ', 'Last', 'First')                  'Last, First'
+LTRIM('  MySQL  ')                                'MySQL  '
+RTRIM('  MySQL  ')                                '  MySQL'
+TRIM('  MySQL  ')                                 'MySQL'
+TRIM(BOTH '*' FROM '****MySQL****')               'MySQL'
+LOWER('MySQL')                                    'mysql'
+UPPER('ca')                                       'CA'
+LEFT('MySQL', 3)                                  'MyS'
+RIGHT('MySQL', 3)                                 'SQL'
+SUBSTRING('(559) 555-1212', 7, 8)                 '555-1212' 
+SUBSTRING_INDEX('http://www.murach.com', '.', -2) 'murach.com'
+LENGTH('MySQL')                                    5
+LENGTH('  MySQL  ')                                9
+LOCATE('SQL', '  MySQL')                           5
+LOCATE('-', '(559) 555-1212')                      10
+REPLACE(RIGHT('(559) 555-1212', 13),') ', '-')    '559-555-1212' 
+INSERT("MySQL", 1, 0, "Murach's ")                "Murach's MySQL" 
+INSERT('MySQL', 1, 0, 'Murach''s ')               "Murach's MySQL"
+``` 
+- A SELECT statement that uses three functions:
+```sql
+SELECT vendor_name,
+       CONCAT_WS(', ', vendor_contact_last_name, vendor_contact_first_name) AS contact_name,
+       RIGHT(vendor_phone, 8) AS phone
+FROM vendors
+WHERE LEFT(vendor_phone, 4) = '(559'
+ORDER BY contact_name
+``` 
+### How to sort by a string column that contains numbers:
+
+- Sorted by the emp_id column:
+```sql
+SELECT *
+FROM string_sample
+ORDER BY emp_id
+```  
+- Sorted by the emp_id column explicitly cast as an integer:
+ ```sql
+SELECT *
+FROM string_sample
+ORDER BY CAST(emp_id AS SIGNED)
+``` 
+- Sorted by the emp_id column implicitly cast as an integer:
+```sql
+SELECT *
+FROM string_sample
+ORDER BY emp_id + 0
+``` 
+- Sorted by the emp_id column after it has been padded with leading zeros:
+```sql```sql
+SELECT LPAD(emp_id, 2, '0') AS emp_id, emp_name
+FROM string_sample
+ORDER BY emp_id
+```  
+- How to use the SUBSTRING_INDEX function to parse a string:
+```sql
+SELECT emp_name,
+       SUBSTRING_INDEX(emp_name, ' ', 1) AS first_name,
+       SUBSTRING_INDEX(emp_name, ' ', -1) AS last_name
+FROM string_sample
+```   
+ 
+- How to use the LOCATE function to find a character in a string:
+```sql
+SELECT emp_name,
+       LOCATE(' ', emp_name) AS first_space,
+       LOCATE(' ', emp_name, LOCATE(' ', emp_name) + 1) AS second_space
+FROM string_sample
+```   
+- How to use the SUBSTRING function to parse a string:
+```sql
+SELECT emp_name,
+       SUBSTRING(emp_name, 1, LOCATE(' ', emp_name) - 1) AS first_name,
+       SUBSTRING(emp_name, LOCATE(' ', emp_name) + 1) AS last_name
+FROM string_sample
+```   
+- Some of the numeric functions:
+```sql
+ROUND(number[,length])
+TRUNCATE(number,length)
+CEILING(number)
+FLOOR(number)
+ABS(number)
+SIGN(number)
+SQRT(number)
+POWER(number,power)
+RAND([integer])
+```  
+- Examples that use the numeric functions:
+```sql
+Function                Result
+ROUND(12.49,0)            12 
+ROUND(12.50,0)            13 
+ROUND(12.49,1)            12.5 
+TRUNCATE(12.51,0)         12 
+TRUNCATE(12.49,1)         12.4
+CEILING(12.5)             13 
+CEILING(-12.5)           -12 
+FLOOR(-12.5)             -13 
+FLOOR(12.5)               12 
+ABS(-1.25)                1.25 
+ABS(1.25)                 1.25 
+SIGN(-1.25)              -1 
+SIGN(1.25)                1
+SQRT(125.43)              11.199553562530964 
+POWER(9,2)                81
+RAND()                    0.2444132019248 
+```  
+- A search for an exact value that doesn’t include two approximate values:
+```sql
+SELECT *
+FROM float_sample
+WHERE float_value = 1
+```  
+### How to search for approximate values:
+
+- Search for a range of values:
+```sql
+SELECT *
+FROM float_sample
+WHERE float_value BETWEEN 0.99 AND 1.01
+```  
+- Search for rounded values:
+```sql
+SELECT *
+FROM float_sample
+WHERE ROUND(float_value, 2) = 1.00
+```  
