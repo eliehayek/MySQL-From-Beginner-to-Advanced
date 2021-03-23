@@ -1,4 +1,4 @@
-# Functions
+# Functions Lab
 
 1. Write a SELECT statement that returns these columns from the Products table:
 The list_price column
