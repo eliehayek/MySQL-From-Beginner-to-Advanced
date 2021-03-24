@@ -10,7 +10,7 @@ Sort the result set by the discount_amount column in ascending sequence.
 ```sql
 SELECT  list_price, 
         discount_percent,
-		ROUND(list_price * (discount_percent / 100), 2) AS discount_amount
+	ROUND(list_price * (discount_percent / 100), 2) AS discount_amount
 FROM products
 ```
 
