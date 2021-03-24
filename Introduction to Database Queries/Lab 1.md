@@ -1,6 +1,6 @@
 1. Write a SELECT statement that returns four columns from the Products table: 
 product_code, product_name, list_price, and discount_percent. 
-Add an ORDER BY clause to this statement that sorts the result set by list price in descending sequence */
+Add an ORDER BY clause to this statement that sorts the result set by list price in descending sequence.
 
 ```sql
 SELECT product_code, product_name, list_price, discount_percent
@@ -15,7 +15,7 @@ Doe, John
 Sort the result set by the last_name column in ascending sequence.
 Return only the customers whose last name begins with letters from M to Z.
 NOTE: When comparing strings of characters, ‘M’ comes before any string of characters that begins with ‘M’. 
-For example, ‘M’ comes before ‘Murach’ */
+For example, ‘M’ comes before ‘Murach’
 
 ```sql
 SELECT  first_name, last_name, 
@@ -30,7 +30,7 @@ product_name The product_name column
 list_price The list_price column
 date_added The date_added column
 Return only the rows with a list price that’s greater than 500 and less than 2000.
-Sort the result set by the date_added column in descending sequence */
+Sort the result set by the date_added column in descending sequence
 
 ```sql
 SELECT product_name, list_price, date_added
@@ -47,7 +47,7 @@ discount_amount A column that’s calculated from the previous two columns
 discount_price A column that’s calculated from the previous three columns
 Round the discount_amount and discount_price columns to 2 decimal places.
 Sort the result set by the discount_price column in descending sequence.
-Use the LIMIT clause so the result set contains only the first 5 rows */
+Use the LIMIT clause so the result set contains only the first 5 rows 
 
 ```sql
 SELECT  product_name AS 'The product name',
@@ -70,7 +70,7 @@ LIMIT 5
 -item_total A column that’s calculated by subtracting the discount
 amount from the item price and then multiplying by the quantity.
 Only return rows where the item_total is greater than 500.
-Sort the result set by item total in descending sequence */
+Sort the result set by item total in descending sequence
 
 ```sql
 SELECT 	item_id AS 'The item id',
@@ -90,7 +90,7 @@ ORDER BY ((item_price - discount_amount) * quantity) DESC
 order_id The order_id column
 order_date The order_date column
 ship_date The ship_date column
-Return only the rows where the ship_date column contains a null value */
+Return only the rows where the ship_date column contains a null value 
 
 ```sql
 SELECT 	order_id AS 'The order id',
@@ -105,7 +105,7 @@ price 100 (dollars)
 tax_rate .07 (7 percent)
 tax_amount The price multiplied by the tax
 total The price plus the tax 
-To calculate the fourth column, add the expressions you used for the first and third */
+To calculate the fourth column, add the expressions you used for the first and third 
 
 ```sql
 SELECT  100 AS price,
