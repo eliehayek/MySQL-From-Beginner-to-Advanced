@@ -3,10 +3,10 @@ category_name: Brass
 Code the INSERT statement so MySQL automatically generates the category_id column
 
 ```sql
-INSERT INTO categories
-		(category_id, category_name)
-VALUES 
-		(DEFAULT, 'Brass')
+INSERT INTO categories 
+        (category_id, category_name)
+VALUES  
+        (DEFAULT, 'Brass')
 ```
 
 2. Write an UPDATE statement that modifies the drums category in the Categories table. 
@@ -39,9 +39,9 @@ Use a column list for this statement
 
 ```sql
 INSERT INTO products
-		(product_id, category_id, product_code, product_name, description, list_price, discount_percent, date_added)
+	(product_id, category_id, product_code, product_name, description, list_price, discount_percent, date_added)
 VALUES
-		(DEFAULT, 4, 'dgx_640', 'Yamaha DGX 640 88-Key Digital Piano', 'Long description to come', 799.99, 0, NOW()) 
+	(DEFAULT, 4, 'dgx_640', 'Yamaha DGX 640 88-Key Digital Piano', 'Long description to come', 799.99, 0, NOW()) 
 ```
 
 5. Write an UPDATE statement that modifies the 'Fender Stratocaster' product.
