@@ -26,8 +26,15 @@ and years and separate them by slashes. Use 2-digit hours and minutes on a 24-ho
 Alias the column  order_datetime
 Sort the result set by the order_date column in ascending sequence. 
 
-
-
+```sql
+SELECT  order_date,
+		DATE_FORMAT(order_date, '%Y') AS order_year,
+        DATE_FORMAT(order_date, '%b-%d-%Y') AS order_date_formatted,
+        DATE_FORMAT(order_date, '%h:%i %p') AS order_time,
+        DATE_FORMAT(order_date, '%m/%d/%y %H:%i') AS order_datetime
+FROM orders
+ORDER BY order_date ASC
+```
 
 3. Write a SELECT statement that returns these columns from the Orders table:
 The card_number column
