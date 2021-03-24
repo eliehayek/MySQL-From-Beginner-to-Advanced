@@ -14,3 +14,12 @@
 #### 2.2 Subqueries
 #### 2.3 Working with Data types
 #### 2.4 Functions
+
+## 3. Advanced Database Administration
+
+
+#### 3.1 Creating Databases, tables and indexes
+#### 3.2 Creating views
+#### 3.3 Stored program coding
+#### 3.4 Transactions and locking
+#### 3.5 Creating stored procedures and functions
