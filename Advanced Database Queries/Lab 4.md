@@ -7,7 +7,12 @@ A column named discount_amount that uses the previous two columns to calculate t
 and uses the ROUND function to round the result so it has 2 decimal digits
 Sort the result set by the discount_amount column in ascending sequence. 
 
-
+```sql
+SELECT  list_price, 
+        discount_percent,
+		ROUND(list_price * (discount_percent / 100), 2) AS discount_amount
+FROM products
+```
 
 2. Write a SELECT statement that returns these columns from the Orders table:
 The order_date column
