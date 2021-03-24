@@ -1,6 +1,6 @@
 1. Write a SELECT statement that joins the Categories table to the Products table and returns these columns: 
 category_name, product_name, list_price.
-Sort the result set by the category_name column and then by the product_name column in ascending sequence */
+Sort the result set by the category_name column and then by the product_name column in ascending sequence 
 
 ```sql
 SELECT c.category_name, p.product_name, p.list_price
@@ -12,7 +12,7 @@ ORDER BY c.category_name, p.product_name ASC
 2. Write a SELECT statement that joins the Customers table to the Addresses table and returns these columns: 
 first_name, last_name, line1, city, state, zip_code.
 Return one row for each address for the customer with an email address of allan.sherwood@yahoo.com
-Sort the result set by the zip_code column in ascending sequence */
+Sort the result set by the zip_code column in ascending sequence 
 
 ```sql
 SELECT c.first_name, c.last_name, a.line1, a.city, a.state, a.zip_code
@@ -25,7 +25,7 @@ ORDER BY a.zip_code ASC
 3. Write a SELECT statement that joins the Customers table to the Addresses table and returns these columns: 
 first_name, last_name, line1, city, state, zip_code.
 Return one row for each customer, but only return addresses that are the shipping address for a customer.
-Sort the result set by the zip_code column in ascending sequence */
+Sort the result set by the zip_code column in ascending sequence 
 
 ```sql
 SELECT c.first_name, c.last_name, a.line1, a.city, a.state, a.zip_code
@@ -38,7 +38,7 @@ ORDER BY a.zip_code ASC
 4. Write a SELECT statement that joins the Customers, Orders, Order_Items, and Products tables. 
 This statement should return these columns: last_name, first_name, order_date, product_name, item_price, discount_amount, and quantity.
 Use aliases for the tables.
-Sort the final result set by the last_name, order_date, and product_name columns */
+Sort the final result set by the last_name, order_date, and product_name columns 
 
 ```sql
 SELECT last_name, first_name, order_date, product_name, item_price, discount_amount, quantity
@@ -57,7 +57,7 @@ order_id	The order_id column
 order_date	The order_date column
 If the order has a value in the ship_date column, the ship_status column should contain a value of SHIPPED. 
 Otherwise, it should contain a value of NOT SHIPPED.
-Sort the final result set by order_date in descending order */
+Sort the final result set by order_date in descending order 
 
 ```sql
 SELECT  'SHIPPED' AS 'Ship Status',
